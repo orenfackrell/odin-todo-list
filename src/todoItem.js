@@ -1,5 +1,5 @@
 // ES6 module syntax
-export default class TodoItem {
+export class TodoItem {
   constructor(title, description, dueDate, startDate, priority, notes, progress, project) {
     this.title = title;
     this.description = description;
@@ -75,4 +75,17 @@ export default class TodoItem {
   set project(value) {
     this.project = value;
   }
+}
+
+export function createTodoItem(
+  title,
+  description,
+  dueDate,
+  startDate,
+  priority,
+  notes,
+  progress,
+  project,
+) {
+  return new TodoItem(title, description, dueDate, startDate, priority, notes, progress, project);
 }

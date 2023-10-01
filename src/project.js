@@ -1,7 +1,7 @@
 // ES6 module syntax
 import TodoItem from './todoItem';
 
-export default class Project {
+export class Project {
   constructor(title, dueDate, startDate, priority, notes) {
     this.title = title;
     this.dueDate = dueDate;
@@ -74,4 +74,17 @@ export default class Project {
     const completedItems = this.todoItems.filter((item) => item.progress === 100).length;
     return (completedItems / this.todoItems.length) * 100;
   }
+}
+
+export function createTodoItem(
+  title,
+  description,
+  dueDate,
+  startDate,
+  priority,
+  notes,
+  progress,
+  project,
+) {
+  return new TodoItem(title, description, dueDate, startDate, priority, notes, progress, project);
 }
