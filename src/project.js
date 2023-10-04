@@ -1,6 +1,8 @@
 // ES6 module syntax
 import TodoItem from './todoItem';
 
+export const allProjects = [];
+
 export class Project {
   constructor(title, dueDate, startDate, priority, notes) {
     this.title = title;
@@ -9,6 +11,7 @@ export class Project {
     this.priority = priority;
     this.notes = notes;
     this.todoItems = [];
+    this.selected = false;
   }
 
   // Getters and Setters for each property
@@ -60,6 +63,14 @@ export class Project {
     this.todoItems = value;
   }
 
+  get selected() {
+    return this.selected;
+  }
+
+  set selected(value) {
+    this.selected = value;
+  }
+
   // Method to add a todo item to the project
   addTodoItem(todoItem) {
     if (todoItem instanceof TodoItem) {
@@ -76,15 +87,7 @@ export class Project {
   }
 }
 
-export function createTodoItem(
-  title,
-  description,
-  dueDate,
-  startDate,
-  priority,
-  notes,
-  progress,
-  project,
-) {
-  return new TodoItem(title, description, dueDate, startDate, priority, notes, progress, project);
+export function createProject(title, dueDate, startDate, priority, notes) {
+  const newItem = new Project(title, dueDate, startDate, priority, notes);
+  allProjects.push(newItem);
 }
