@@ -56,3 +56,5 @@ function createMainHub() {
     showCurrentProject(selectedProject);
   }
 }
+
+export default createMainHub;
