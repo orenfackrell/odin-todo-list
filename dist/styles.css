@@ -228,68 +228,68 @@ i {
   transform: translate3d(-0.25084px, -104.9997px, 0);
 }
 
-.blue {
+.remove {
   background-color: #669ae1;
   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
 
-.blue:hover {
+.remove:hover {
   color: #669ae1;
   text-shadow: none;
 }
 
-.green {
+.calendar {
   background-color: #70cc72;
   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
 
-.green:hover {
+.calendar:hover {
   color: #70cc72;
   text-shadow: none;
 }
 
-.red {
+.light-dark {
   background-color: #fe4365;
   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
 
-.red:hover {
+.light-dark:hover {
   color: #fe4365;
   text-shadow: none;
 }
 
-.purple {
+.change-palette {
   background-color: #c49cde;
   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
 
-.purple:hover {
+.change-palette:hover {
   color: #c49cde;
   text-shadow: none;
 }
 
-.orange {
+.add-item {
   background-color: #fc913a;
   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
 
-.orange:hover {
+.add-item:hover {
   color: #fc913a;
   text-shadow: none;
 }
 
-.lightblue {
+.add-project {
   background-color: #62c2e4;
   box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
 }
 
-.lightblue:hover {
+.add-project:hover {
   color: #62c2e4;
   text-shadow: none;
 }
