@@ -1,6 +1,7 @@
 import createMainHub from './mainHub';
 import { Project, allProjects } from './project';
 import { TodoItem } from './todoItem';
+import menuFunctions from './buttonFunc';
 
 // Create dummy projects
 const project1 = new Project('Project 1');
@@ -12,5 +13,7 @@ project2.addTodoItem(todoItem2);
 allProjects.push(project1, project2);
 
 document.addEventListener('DOMContentLoaded', () => {
-  createMainHub();
+  // UNCOMMENT ME OUT -> to remove the error being thrown by the empty projects
+  // createMainHub();
+  menuFunctions();
 });
