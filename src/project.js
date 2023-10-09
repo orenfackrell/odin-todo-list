@@ -1,5 +1,5 @@
 // ES6 module syntax
-import TodoItem from './todoItem';
+import { TodoItem } from './todoItem';
 
 export const allProjects = [];
 
@@ -12,63 +12,6 @@ export class Project {
     this.notes = notes;
     this.todoItems = [];
     this.selected = false;
-  }
-
-  // Getters and Setters for each property
-  get title() {
-    return this.title;
-  }
-
-  set title(value) {
-    this.title = value;
-  }
-
-  get dueDate() {
-    return this.dueDate;
-  }
-
-  set dueDate(value) {
-    this.dueDate = value;
-  }
-
-  get startDate() {
-    return this.startDate;
-  }
-
-  set startDate(value) {
-    this.startDate = value;
-  }
-
-  get priority() {
-    return this.priority;
-  }
-
-  set priority(value) {
-    this.priority = value;
-  }
-
-  get notes() {
-    return this.notes;
-  }
-
-  set notes(value) {
-    this.notes = value;
-  }
-
-  get todoItems() {
-    return this.todoItems;
-  }
-
-  set todoItems(value) {
-    this.todoItems = value;
-  }
-
-  get selected() {
-    return this.selected;
-  }
-
-  set selected(value) {
-    this.selected = value;
   }
 
   // Method to add a todo item to the project
