@@ -84,7 +84,24 @@ function changeColours() {
 }
 
 function createItem() {
+  const fields = [
+    { label: 'Name:', name: 'name', type: 'text' },
+    { label: 'Description:', name: 'description', type: 'text' },
+    { label: 'Start Date:', name: 'start-date', type: 'date' },
+    { label: 'Due Date:', name: 'due-date', type: 'date' },
+    { label: 'Priority:', name: 'priority', type: 'range' },
+    { label: 'Notes:', name: 'notes', type: 'text' },
+  ];
 
+  const popup = menuPopUp(fields);
+  body.appendChild(popup);
+  popup.style.display = 'block';
+
+  const addButton = document.querySelector('.submit-button');
+  addButton.addEventListener('submit', (event) => {
+    event.preventDefault();
+    body.removeChild(popup);
+  });
 }
 
 function createProject() {
