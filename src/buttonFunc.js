@@ -4,11 +4,91 @@ const lightDark = document.querySelector('.light-dark');
 const changePalette = document.querySelector('.change-palette');
 const addItem = document.querySelector('.add-item');
 const addProject = document.querySelector('.add-project');
+const { body } = document;
 
 // const menuButtons = [remove, calendar, lightDark, changePalette, addItem, addProject];
 
-function itsAllHookedUp() {
-  console.log('its all hooked up');
+function menuPopUp(fields) {
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+
+  const popupContent = document.createElement('div');
+  popupContent.className = 'popup-content';
+
+  const addButton = document.createElement('button');
+  addButton.className = 'submit-button';
+  addButton.type = 'submit';
+  addButton.textContent = 'Add';
+
+  const form = document.createElement('form');
+
+  fields.forEach((field) => {
+    const inputLabelPair = document.createElement('div');
+    inputLabelPair.className = 'input-label-pair';
+
+    const label = document.createElement('label');
+    label.textContent = field.label;
+    label.setAttribute('for', `${field.name}`);
+
+    let input;
+    switch (field.name) {
+      case 'notes':
+        input = document.createElement('textarea');
+        input.rows = '3';
+        input.cols = '35';
+        input.id = field.name;
+        input.required = false;
+        break;
+      case 'description':
+        input = document.createElement('textarea');
+        input.rows = '2';
+        input.cols = '35';
+        input.id = field.name;
+        input.required = true;
+        break;
+      default:
+        input = document.createElement('input');
+        input.type = `${field.type}`;
+        input.id = field.name;
+        input.required = true;
+    }
+
+    inputLabelPair.appendChild(label);
+    inputLabelPair.appendChild(input);
+
+    form.appendChild(inputLabelPair);
+  });
+
+  form.appendChild(addButton);
+
+  popupContent.appendChild(form);
+  popup.appendChild(popupContent);
+
+  return popup;
+}
+
+function removeCurrentItem() {
+  // add a way for the currently open todo item to be recorded, then simply remove the active one
+}
+
+function openCalendar() {
+  // open up a calendar which shows all of the todo items on their due date with their urgency shown
+}
+
+function toggleTheme() {
+  // invert light / dark themes
+}
+
+function changeColours() {
+  // give a menu for the user to give main + two accent colours to replace those on the page
+}
+
+function createItem() {
+
+}
+
+function createProject() {
+  // create menu pop-up for the user to input the needed details for a new project
 }
 
 function menuFunctions() {
@@ -30,36 +110,6 @@ function menuFunctions() {
   addProject.addEventListener('click', () => {
     createProject();
   });
-}
-
-function menuPopUp() {
-  // create a template popup which takes x amount of args
-  // use this in the other button functions
-}
-
-function removeCurrentItem() {
-  // add a way for the currently open todo item to be recorded, then simply remove the active one
-}
-
-function openCalendar() {
-  // open up a calendar which shows all of the todo items on their due date with their urgency shown
-}
-
-function toggleTheme() {
-  // invert light / dark themes
-}
-
-function changeColours() {
-  // give a menu for the user to give main + two accent colours to replace those on the page
-}
-
-function createItem() {
-  // create menu pop-up for the user to input the needed details for a new item
-  // have the default project being the one the user is currently in
-}
-
-function createProject() {
-  // create menu pop-up for the user to input the needed details for a new project
 }
 
 export default menuFunctions;
