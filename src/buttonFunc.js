@@ -1,5 +1,5 @@
 // Import from other modules
-import { allProjects } from './project';
+import { Project, allProjects } from './project';
 import { TodoItem } from './todoItem';
 
 // Create global variables
@@ -150,7 +150,52 @@ function createItem() {
 }
 
 function createProject() {
-  // create menu pop-up for the user to input the needed details for a new project
+  const menuTitle = 'Create Todo Project';
+  const fields = [
+    { label: 'Name:', name: 'name', type: 'text' },
+    { label: 'Description:', name: 'description', type: 'text' },
+    { label: 'Start Date:', name: 'start-date', type: 'date' },
+    { label: 'Due Date:', name: 'due-date', type: 'date' },
+    { label: 'Priority:', name: 'priority', type: 'range' },
+    { label: 'Notes:', name: 'notes', type: 'text' },
+  ];
+
+  const popup = menuPopUp(menuTitle, fields);
+  body.appendChild(popup);
+  popup.style.display = 'block';
+
+  const title = document.querySelector('#name');
+  const description = document.querySelector('#description');
+  const startDate = document.querySelector('#start-date');
+  const dueDate = document.querySelector('#due-date');
+  const priority = document.querySelector('#priority');
+  const notes = document.querySelector('#notes');
+
+  // default start date to current date
+  const currentDate = new Date().toISOString().slice(0, 10);
+  startDate.value = currentDate;
+
+  const cancelButton = document.querySelector('.cancel-button');
+  cancelButton.addEventListener('click', () => {
+    if (confirm('Are you sure?')) {
+      body.removeChild(popup);
+    }
+  });
+  const addButton = document.querySelector('.submit-button');
+  addButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    const newProject = new Project(
+      title.value,
+      description.value,
+      dueDate.value,
+      startDate.value,
+      priority.value,
+      notes.value,
+    );
+    // add the new item to all projects
+    allProjects.push(newProject);
+    body.removeChild(popup);
+  });
 }
 
 function menuFunctions() {
