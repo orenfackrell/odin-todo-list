@@ -1,3 +1,8 @@
+// Import from other modules
+import { allProjects } from './project';
+import { TodoItem } from './todoItem';
+
+// Create global variables
 const remove = document.querySelector('.remove');
 const calendar = document.querySelector('.calendar');
 const lightDark = document.querySelector('.light-dark');
@@ -6,7 +11,7 @@ const addItem = document.querySelector('.add-item');
 const addProject = document.querySelector('.add-project');
 const { body } = document;
 
-// const menuButtons = [remove, calendar, lightDark, changePalette, addItem, addProject];
+// Create new date object or getting current date.
 
 function menuPopUp(fields) {
   const popup = document.createElement('div');
@@ -20,6 +25,11 @@ function menuPopUp(fields) {
   addButton.type = 'submit';
   addButton.textContent = 'Add';
 
+  const cancelButton = document.createElement('button');
+  cancelButton.className = 'cancel-button';
+  cancelButton.type = 'button';
+  cancelButton.textContent = 'Cancel';
+
   const form = document.createElement('form');
 
   fields.forEach((field) => {
@@ -31,20 +41,21 @@ function menuPopUp(fields) {
     label.setAttribute('for', `${field.name}`);
 
     let input;
+
     switch (field.name) {
-      case 'notes':
-        input = document.createElement('textarea');
-        input.rows = '3';
-        input.cols = '35';
-        input.id = field.name;
-        input.required = false;
-        break;
       case 'description':
         input = document.createElement('textarea');
         input.rows = '2';
         input.cols = '35';
         input.id = field.name;
         input.required = true;
+        break;
+      case 'notes':
+        input = document.createElement('textarea');
+        input.rows = '3';
+        input.cols = '35';
+        input.id = field.name;
+        input.required = false;
         break;
       default:
         input = document.createElement('input');
@@ -59,6 +70,7 @@ function menuPopUp(fields) {
     form.appendChild(inputLabelPair);
   });
 
+  form.appendChild(cancelButton);
   form.appendChild(addButton);
 
   popupContent.appendChild(form);
@@ -97,9 +109,38 @@ function createItem() {
   body.appendChild(popup);
   popup.style.display = 'block';
 
+  const title = document.querySelector('#name');
+  const description = document.querySelector('#description');
+  const startDate = document.querySelector('#start-date');
+  const dueDate = document.querySelector('#due-date');
+  const priority = document.querySelector('#priority');
+  const notes = document.querySelector('#notes');
+
+  // default start date to current date
+  const currentDate = new Date().toISOString().slice(0, 10);
+  startDate.value = currentDate;
+
+  const cancelButton = document.querySelector('.cancel-button');
+  cancelButton.addEventListener('click', () => {
+    if (confirm('Are you sure?')) {
+      body.removeChild(popup);
+    }
+  });
   const addButton = document.querySelector('.submit-button');
-  addButton.addEventListener('submit', (event) => {
+  addButton.addEventListener('click', (event) => {
     event.preventDefault();
+    const newItem = new TodoItem(
+      title.value,
+      description.value,
+      dueDate.value,
+      startDate.value,
+      priority.value,
+      notes.value,
+    );
+    console.log(newItem);
+    // add the new item to the currently selected project (this might be wrong!)
+    // const currentProject = allProjects.selected;
+    // currentProject.push(newItem);
     body.removeChild(popup);
   });
 }
