@@ -13,12 +13,15 @@ const { body } = document;
 
 // Create new date object or getting current date.
 
-function menuPopUp(fields) {
+function menuPopUp(menuTitle, fields) {
   const popup = document.createElement('div');
   popup.className = 'popup';
 
   const popupContent = document.createElement('div');
   popupContent.className = 'popup-content';
+
+  const header = document.createElement('h3');
+  header.textContent = `${menuTitle}`;
 
   const addButton = document.createElement('button');
   addButton.className = 'submit-button';
@@ -73,6 +76,7 @@ function menuPopUp(fields) {
   form.appendChild(cancelButton);
   form.appendChild(addButton);
 
+  popupContent.appendChild(header);
   popupContent.appendChild(form);
   popup.appendChild(popupContent);
 
@@ -96,6 +100,7 @@ function changeColours() {
 }
 
 function createItem() {
+  const menuTitle = 'Create Todo Item';
   const fields = [
     { label: 'Name:', name: 'name', type: 'text' },
     { label: 'Description:', name: 'description', type: 'text' },
@@ -105,7 +110,7 @@ function createItem() {
     { label: 'Notes:', name: 'notes', type: 'text' },
   ];
 
-  const popup = menuPopUp(fields);
+  const popup = menuPopUp(menuTitle, fields);
   body.appendChild(popup);
   popup.style.display = 'block';
 
@@ -137,7 +142,6 @@ function createItem() {
       priority.value,
       notes.value,
     );
-    console.log(newItem);
     // add the new item to the currently selected project (this might be wrong!)
     // const currentProject = allProjects.selected;
     // currentProject.push(newItem);
