@@ -4,12 +4,13 @@ import { TodoItem } from './todoItem';
 export const allProjects = [];
 
 export class Project {
-  constructor(title, dueDate, startDate, priority, notes) {
+  constructor(title, description, dueDate, startDate, priority, notes) {
     this.title = title;
+    this.description = description;
     this.dueDate = dueDate;
     this.startDate = startDate;
     this.priority = priority;
-    this.notes = notes;
+    this.notes = notes || '';
     this.todoItems = [];
     this.selected = false;
   }
@@ -30,7 +31,7 @@ export class Project {
   }
 }
 
-export function createProject(title, dueDate, startDate, priority, notes) {
-  const newItem = new Project(title, dueDate, startDate, priority, notes);
+export function createProject(title, description, dueDate, startDate, priority, notes) {
+  const newItem = new Project(title, description, dueDate, startDate, priority, notes);
   allProjects.push(newItem);
 }
