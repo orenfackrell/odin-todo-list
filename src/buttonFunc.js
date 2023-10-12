@@ -129,25 +129,45 @@ function createItem() {
   startDate.value = currentDate;
 
   const cancelButton = document.querySelector('.cancel-button');
+
   cancelButton.addEventListener('click', () => {
     const buttonWrapper = document.querySelector('.button-wrapper');
     const submitButton = document.querySelector('.submit-button');
 
     const confirmationMessage = document.createElement('div');
-    confirmationMessage.innerHTML = `
-    <span>Are you sure you want to cancel?</span>
-    <button class="confirm-button submit-button">Confirm</button>
-    <button class="cancel-confirm-button cancel-button">Cancel</button>
-  `;
-    buttonWrapper.innerHTML = '';
+    confirmationMessage.className = 'confirmation-message';
+
+    const spanElement = document.createElement('span');
+    spanElement.textContent = 'Are you sure?';
+
+    const buttonWrapperDiv = document.createElement('div');
+    buttonWrapperDiv.className = 'button-wrapper';
+
+    const confirmButton = document.createElement('button');
+    confirmButton.className = 'confirm-button';
+    confirmButton.textContent = 'Confirm';
+
+    const cancelConfirmButton = document.createElement('button');
+    cancelConfirmButton.className = 'cancel-confirm-button';
+    cancelConfirmButton.textContent = 'Cancel';
+
+    confirmationMessage.appendChild(spanElement);
+
+    buttonWrapperDiv.appendChild(confirmButton);
+    buttonWrapperDiv.appendChild(cancelConfirmButton);
+
+    confirmationMessage.appendChild(buttonWrapperDiv);
+    while (buttonWrapper.firstChild) {
+      buttonWrapper.removeChild(buttonWrapper.firstChild);
+    }
     buttonWrapper.appendChild(confirmationMessage);
-    const confirmButton = document.querySelector('.confirm-button');
     confirmButton.addEventListener('click', () => {
       body.removeChild(popup);
     });
-    const cancelConfirmButton = document.querySelector('.cancel-confirm-button');
     cancelConfirmButton.addEventListener('click', () => {
-      buttonWrapper.innerHTML = '';
+      while (buttonWrapper.firstChild) {
+        buttonWrapper.removeChild(buttonWrapper.firstChild);
+      }
       buttonWrapper.appendChild(cancelButton);
       buttonWrapper.appendChild(submitButton);
     });
@@ -203,24 +223,44 @@ function createProject() {
     const submitButton = document.querySelector('.submit-button');
 
     const confirmationMessage = document.createElement('div');
-    confirmationMessage.innerHTML = `
-    <span>Are you sure you want to cancel?</span>
-    <button class="confirm-button submit-button">Confirm</button>
-    <button class="cancel-confirm-button cancel-button">Cancel</button>
-  `;
-    buttonWrapper.innerHTML = '';
+    confirmationMessage.className = 'confirmation-message';
+
+    const spanElement = document.createElement('span');
+    spanElement.textContent = 'Are you sure?';
+
+    const buttonWrapperDiv = document.createElement('div');
+    buttonWrapperDiv.className = 'button-wrapper';
+
+    const confirmButton = document.createElement('button');
+    confirmButton.className = 'confirm-button';
+    confirmButton.textContent = 'Confirm';
+
+    const cancelConfirmButton = document.createElement('button');
+    cancelConfirmButton.className = 'cancel-confirm-button';
+    cancelConfirmButton.textContent = 'Cancel';
+
+    confirmationMessage.appendChild(spanElement);
+
+    buttonWrapperDiv.appendChild(confirmButton);
+    buttonWrapperDiv.appendChild(cancelConfirmButton);
+
+    confirmationMessage.appendChild(buttonWrapperDiv);
+    while (buttonWrapper.firstChild) {
+      buttonWrapper.removeChild(buttonWrapper.firstChild);
+    }
     buttonWrapper.appendChild(confirmationMessage);
-    const confirmButton = document.querySelector('.confirm-button');
     confirmButton.addEventListener('click', () => {
       body.removeChild(popup);
     });
-    const cancelConfirmButton = document.querySelector('.cancel-confirm-button');
     cancelConfirmButton.addEventListener('click', () => {
-      buttonWrapper.innerHTML = '';
+      while (buttonWrapper.firstChild) {
+        buttonWrapper.removeChild(buttonWrapper.firstChild);
+      }
       buttonWrapper.appendChild(cancelButton);
       buttonWrapper.appendChild(submitButton);
     });
   });
+
   const addButton = document.querySelector('.submit-button');
   addButton.addEventListener('click', (event) => {
     event.preventDefault();
