@@ -73,8 +73,11 @@ function menuPopUp(menuTitle, fields) {
     form.appendChild(inputLabelPair);
   });
 
-  form.appendChild(cancelButton);
-  form.appendChild(addButton);
+  const buttonWrapper = document.createElement('div');
+  buttonWrapper.className = 'button-wrapper';
+  buttonWrapper.appendChild(cancelButton);
+  buttonWrapper.appendChild(addButton);
+  form.appendChild(buttonWrapper);
 
   popupContent.appendChild(header);
   popupContent.appendChild(form);
@@ -127,10 +130,29 @@ function createItem() {
 
   const cancelButton = document.querySelector('.cancel-button');
   cancelButton.addEventListener('click', () => {
-    if (confirm('Are you sure?')) {
+    const buttonWrapper = document.querySelector('.button-wrapper');
+    const submitButton = document.querySelector('.submit-button');
+
+    const confirmationMessage = document.createElement('div');
+    confirmationMessage.innerHTML = `
+    <span>Are you sure you want to cancel?</span>
+    <button class="confirm-button submit-button">Confirm</button>
+    <button class="cancel-confirm-button cancel-button">Cancel</button>
+  `;
+    buttonWrapper.innerHTML = '';
+    buttonWrapper.appendChild(confirmationMessage);
+    const confirmButton = document.querySelector('.confirm-button');
+    confirmButton.addEventListener('click', () => {
       body.removeChild(popup);
-    }
+    });
+    const cancelConfirmButton = document.querySelector('.cancel-confirm-button');
+    cancelConfirmButton.addEventListener('click', () => {
+      buttonWrapper.innerHTML = '';
+      buttonWrapper.appendChild(cancelButton);
+      buttonWrapper.appendChild(submitButton);
+    });
   });
+
   const addButton = document.querySelector('.submit-button');
   addButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -177,9 +199,27 @@ function createProject() {
 
   const cancelButton = document.querySelector('.cancel-button');
   cancelButton.addEventListener('click', () => {
-    if (confirm('Are you sure?')) {
+    const buttonWrapper = document.querySelector('.button-wrapper');
+    const submitButton = document.querySelector('.submit-button');
+
+    const confirmationMessage = document.createElement('div');
+    confirmationMessage.innerHTML = `
+    <span>Are you sure you want to cancel?</span>
+    <button class="confirm-button submit-button">Confirm</button>
+    <button class="cancel-confirm-button cancel-button">Cancel</button>
+  `;
+    buttonWrapper.innerHTML = '';
+    buttonWrapper.appendChild(confirmationMessage);
+    const confirmButton = document.querySelector('.confirm-button');
+    confirmButton.addEventListener('click', () => {
       body.removeChild(popup);
-    }
+    });
+    const cancelConfirmButton = document.querySelector('.cancel-confirm-button');
+    cancelConfirmButton.addEventListener('click', () => {
+      buttonWrapper.innerHTML = '';
+      buttonWrapper.appendChild(cancelButton);
+      buttonWrapper.appendChild(submitButton);
+    });
   });
   const addButton = document.querySelector('.submit-button');
   addButton.addEventListener('click', (event) => {
