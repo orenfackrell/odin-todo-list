@@ -1,4 +1,5 @@
 // Import from other modules
+import { createMainHub, createNavBar, createProjectDiv } from './mainHub';
 import { Project, allProjects } from './project';
 import { TodoItem } from './todoItem';
 
@@ -184,9 +185,8 @@ function createItem() {
       priority.value,
       notes.value,
     );
-    // add the new item to the currently selected project (this might be wrong!)
-    // const currentProject = allProjects.selected;
-    // currentProject.push(newItem);
+    const currentProject = allProjects.find((project) => project.selected);
+    currentProject.todoItems.push(newItem);
     body.removeChild(popup);
   });
 }
@@ -264,6 +264,7 @@ function createProject() {
   const addButton = document.querySelector('.submit-button');
   addButton.addEventListener('click', (event) => {
     event.preventDefault();
+    // create a new project and make it the active one
     const newProject = new Project(
       title.value,
       description.value,
@@ -272,8 +273,21 @@ function createProject() {
       priority.value,
       notes.value,
     );
+    // set all selected values to false
+    const previouslySelectedProject = allProjects.find((project) => project.selected);
+
+    if (previouslySelectedProject) {
+      // If a previously selected project was found, set its 'selected' property to false
+      previouslySelectedProject.selected = false;
+    }
+
+    // have only the newest project be selected
+    newProject.selected = true;
     // add the new item to all projects
     allProjects.push(newProject);
+    console.log(allProjects);
+    createProjectDiv(newProject);
+
     body.removeChild(popup);
   });
 }
