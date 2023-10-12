@@ -2,14 +2,17 @@ import { Project, allProjects } from './project';
 
 const mainHub = document.getElementById('content-hub');
 
-function createProjectDiv(project) {
+export function createProjectDiv(project) {
   const projectDiv = document.createElement('div');
-  projectDiv.textContent = `${project.title}, ${project.dueDate}, ${project.calculateProgress()}`;
+  projectDiv.className = `${project.title}-div`;
+  projectDiv.textContent = `${project.title}, ${project.dueDate}, ${
+    project.calculateProgress() || 0
+  }%`;
   projectDiv.style.borderColor = project.priority;
   return projectDiv;
 }
 
-function createNavBar() {
+export function createNavBar() {
   const navBar = document.createElement('div');
   navBar.classList.add('nav-bar');
 
@@ -23,9 +26,11 @@ function createNavBar() {
       navBar.appendChild(projectDiv);
     }
   });
+
+  mainHub.appendChild(navBar);
 }
 
-function showCurrentProject(project) {
+export function showCurrentProject(project) {
   const headerInfo = document.createElement('div');
   headerInfo.textContent = `${project.title}, ${project.dueDate}, ${project.calculateProgress()}`;
   headerInfo.style.borderColor = project.priority;
@@ -40,7 +45,7 @@ function showCurrentProject(project) {
   mainHub.appendChild(todoItemsDiv);
 }
 
-function createMainHub() {
+export function createMainHub() {
   mainHub.style.display = 'flex';
 
   const navBar = createNavBar();
@@ -56,5 +61,3 @@ function createMainHub() {
     showCurrentProject(selectedProject);
   }
 }
-
-export default createMainHub;
