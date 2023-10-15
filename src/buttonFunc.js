@@ -1,5 +1,11 @@
 // Import from other modules
-import { createMainHub, createNavBar, createProjectDiv } from './mainHub';
+import {
+  createMainHub,
+  createNavBar,
+  createProjectDiv,
+  showCurrentProject,
+  updateNavBar,
+} from './mainHub';
 import { Project, allProjects } from './project';
 import { TodoItem } from './todoItem';
 
@@ -286,9 +292,10 @@ function createProject() {
     // add the new item to all projects
     allProjects.push(newProject);
     console.log(allProjects);
-    createProjectDiv(newProject);
 
     body.removeChild(popup);
+    showCurrentProject(newProject);
+    updateNavBar();
   });
 }
 
