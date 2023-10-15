@@ -4,7 +4,8 @@ const mainHub = document.getElementById('content-hub');
 
 export function createProjectDiv(project) {
   const projectDiv = document.createElement('div');
-  projectDiv.className = `${project.title}-div`;
+  const projectClass = `${project.title}`.replace(/\s+/g, '');
+  projectDiv.className = `${projectClass}-div`;
   projectDiv.textContent = `${project.title}, ${project.dueDate}, ${
     project.calculateProgress() || 0
   }%`;
@@ -30,19 +31,33 @@ export function createNavBar() {
   mainHub.appendChild(navBar);
 }
 
+export function updateNavBar() {
+  const contentHub = document.querySelector('#content-hub');
+  const navBar = document.querySelector('.nav-bar');
+  contentHub.removeChild(navBar);
+
+  createNavBar();
+}
+
 export function showCurrentProject(project) {
+  const currentProject = document.createElement('div');
+  currentProject.className = 'current-project';
   const headerInfo = document.createElement('div');
+  headerInfo.className = 'project-header';
   headerInfo.textContent = `${project.title}, ${project.dueDate}, ${project.calculateProgress()}`;
   headerInfo.style.borderColor = project.priority;
   mainHub.appendChild(headerInfo);
 
   const todoItemsDiv = document.createElement('div');
+  todoItemsDiv.className = 'project-task';
   project.todoItems.forEach((item) => {
     const itemDiv = document.createElement('div');
-    itemDiv.textContent = `${item.title}, ${item.dueDate}, ${item.progress}`;
+    itemDiv.textContent = `${item.title}, ${item.dueDate}, ${item.complete}`;
     todoItemsDiv.appendChild(itemDiv);
   });
-  mainHub.appendChild(todoItemsDiv);
+  currentProject.appendChild(headerInfo);
+  currentProject.appendChild(todoItemsDiv);
+  mainHub.appendChild(currentProject);
 }
 
 export function createMainHub() {
