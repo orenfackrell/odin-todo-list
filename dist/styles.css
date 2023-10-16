@@ -2,15 +2,38 @@
 #content-hub {
   display: grid;
   grid-template-columns: 1fr 5fr;
+  width: 60%;
+  justify-content: center;
 }
 
 .nav-bar {
   grid-area: 1 / 1 / 2 / 2;
 }
+
+.nav-bar > div {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem;
+  border: #333 2px solid;
+  border-radius: 1rem;
+  margin: 1rem 0;
+}
+
+.project-info > :nth-child(1) {
+  text-align: left;
+}
+
+.project-info > :nth-child(2) {
+  text-align: right;
+}
+
 /* Stylings for the flower menu */
 body {
   padding: 0;
   margin: 0;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
   text-align: center;
   font-family: 'Lato', sans-serif;
 }
