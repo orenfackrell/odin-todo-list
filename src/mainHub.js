@@ -6,9 +6,25 @@ export function createProjectDiv(project) {
   const projectDiv = document.createElement('div');
   const projectClass = `${project.title}`.replace(/\s+/g, '');
   projectDiv.className = `${projectClass}-div`;
-  projectDiv.textContent = `${project.title}, ${project.dueDate}, ${
-    project.calculateProgress() || 0
-  }%`;
+
+  const projectInfo = document.createElement('div');
+  projectInfo.className = 'project-info';
+
+  const projectTitle = document.createElement('div');
+  projectTitle.textContent = `${project.title}`;
+
+  const projectDate = document.createElement('div');
+  projectDate.textContent = `${project.dueDate}`;
+
+  const projectProgress = document.createElement('div');
+  projectProgress.className = 'project-progress';
+  projectProgress.textContent = `${project.calculateProgress() || 0}%`;
+
+  projectInfo.appendChild(projectTitle);
+  projectInfo.appendChild(projectDate);
+  projectDiv.appendChild(projectInfo);
+  projectDiv.appendChild(projectProgress);
+
   projectDiv.style.borderColor = project.priority;
   return projectDiv;
 }
@@ -42,8 +58,14 @@ export function updateNavBar() {
 export function showCurrentProject(project) {
   const currentProject = document.createElement('div');
   currentProject.className = 'current-project';
+
+  const title = document.createElement('h3');
+  title.textContent = 'Current Project';
+  currentProject.appendChild(title);
+
   const headerInfo = document.createElement('div');
   headerInfo.className = 'project-header';
+
   headerInfo.textContent = `${project.title}, ${project.dueDate}, ${project.calculateProgress()}`;
   headerInfo.style.borderColor = project.priority;
   mainHub.appendChild(headerInfo);
