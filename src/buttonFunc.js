@@ -279,9 +279,9 @@ function createProject() {
       priority.value,
       notes.value,
     );
+
     // set all selected values to false
     const previouslySelectedProject = allProjects.find((project) => project.selected);
-
     if (previouslySelectedProject) {
       // If a previously selected project was found, set its 'selected' property to false
       previouslySelectedProject.selected = false;
@@ -292,6 +292,11 @@ function createProject() {
     // add the new item to all projects
     allProjects.push(newProject);
     console.log(allProjects);
+
+    // remove the previous current project display
+    const contentHub = document.querySelector('#content-hub');
+    const previousCurrentDiv = document.querySelector('.current-project');
+    contentHub.removeChild(previousCurrentDiv);
 
     body.removeChild(popup);
     showCurrentProject(newProject);
