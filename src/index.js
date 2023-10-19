@@ -5,12 +5,12 @@ import menuFunctions from './buttonFunc';
 
 // Create dummy projects
 for (let i = 0; i < 6; i += 1) {
-  const newProject = new Project(`Dummy Project ${i}`, 'Placeholder description', '20 - 10 - 2023');
+  const newProject = new Project(`Dummy Project ${i}`, 'Placeholder description', ' 30 - 9 - 2023');
   for (let j = 0; j < 4; j += 1) {
     const todoItem = new TodoItem(
       `Todo Item ${j}`,
       'Placeholder description',
-      '2 - 10 - 2023',
+      `${j * 4 + 1} - 10 - 2023`,
       `${j}*4 - 10 - 2023`,
       '70%',
       'some notes and shit',

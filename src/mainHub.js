@@ -102,7 +102,6 @@ export function showCurrentProject(project) {
   const headerInfo = document.createElement('div');
   headerInfo.className = 'project-header';
 
-  console.log(project instanceof Project, project);
   headerInfo.textContent =
     `${project.title}, ${project.dueDate}, ${project.calculateProgress()}%` || '0%';
   headerInfo.style.borderColor = project.priority;
@@ -112,7 +111,7 @@ export function showCurrentProject(project) {
   todoItemsDiv.className = 'project-task';
   project.todoItems.forEach((item) => {
     const itemDiv = document.createElement('div');
-    itemDiv.textContent = `${item.title}, ${item.dueDate}, ${item.complete}`;
+    itemDiv.textContent = `${item.title}, ${item.dueDate}, ${item.priority}`;
     todoItemsDiv.appendChild(itemDiv);
   });
   currentProject.appendChild(headerInfo);
@@ -128,20 +127,3 @@ export function updateCurrentProject() {
   const selectedProject = allProjects.find((project) => project.selected);
   showCurrentProject(selectedProject);
 }
-
-// export function createMainHub() {
-//   mainHub.style.display = 'flex';
-
-//   const navBar = createNavBar();
-//   navBar.style.flex = '1';
-//   mainHub.appendChild(navBar);
-
-//   const projectDiv = document.createElement('div');
-//   projectDiv.style.flex = '4';
-//   mainHub.appendChild(projectDiv);
-
-//   const selectedProject = allProjects.find((project) => project.selected);
-//   if (selectedProject) {
-//     showCurrentProject(selectedProject);
-//   }
-// }

@@ -51,8 +51,6 @@ export function loadProjectsFromLocalStorage() {
       }
 
       allProjects = parsedData.map((projectData) => Object.assign(new Project(), projectData));
-
-      console.log(allProjects);
     } catch (error) {
       alert(`There was an error loading your saved projects. Details: ${error.message}`);
     }
