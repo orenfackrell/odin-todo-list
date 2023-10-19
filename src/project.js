@@ -26,6 +26,9 @@ export class Project {
 
   // Method to calculate the progress of the project
   calculateProgress() {
+    if (this.todoItems.length === 0) {
+      return '0';
+    }
     const completedItems = this.todoItems.filter((item) => item.progress === 100).length;
     return (completedItems / this.todoItems.length) * 100;
   }

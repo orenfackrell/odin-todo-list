@@ -104,7 +104,7 @@ export function showCurrentProject(project) {
 
   console.log(project instanceof Project, project);
   headerInfo.textContent =
-    `${project.title}, ${project.dueDate}, ${project.calculateProgress()}` || '';
+    `${project.title}, ${project.dueDate}, ${project.calculateProgress()}%` || '0%';
   headerInfo.style.borderColor = project.priority;
   mainHub.appendChild(headerInfo);
 
