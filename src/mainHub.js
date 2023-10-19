@@ -18,7 +18,7 @@ export function createProjectDiv(project) {
 
   const projectProgress = document.createElement('div');
   projectProgress.className = 'project-progress';
-  projectProgress.textContent = `${project.calculateProgress() || 0}%`;
+  projectProgress.textContent = `${project.calculateProgress || 0}%`;
 
   projectInfo.appendChild(projectTitle);
   projectInfo.appendChild(projectDate);
@@ -66,7 +66,8 @@ export function showCurrentProject(project) {
   const headerInfo = document.createElement('div');
   headerInfo.className = 'project-header';
 
-  headerInfo.textContent = `${project.title}, ${project.dueDate}, ${project.calculateProgress()}`;
+  headerInfo.textContent =
+    `${project.title}, ${project.dueDate}, ${project.calculateProgress()}` || '';
   headerInfo.style.borderColor = project.priority;
   mainHub.appendChild(headerInfo);
 

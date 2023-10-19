@@ -6,7 +6,7 @@ import {
   showCurrentProject,
   updateNavBar,
 } from './mainHub';
-import { Project, allProjects } from './project';
+import { Project, allProjects, saveProjectsLocalStorage } from './project';
 import { TodoItem } from './todoItem';
 
 // Create global variables
@@ -300,6 +300,7 @@ function createProject() {
 
     body.removeChild(popup);
     showCurrentProject(newProject);
+    saveProjectsLocalStorage();
     updateNavBar();
   });
 }

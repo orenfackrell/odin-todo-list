@@ -1,7 +1,7 @@
 // ES6 module syntax
 import { TodoItem } from './todoItem';
 
-export const allProjects = [];
+export let allProjects = [];
 
 export class Project {
   constructor(title, description, dueDate, startDate, priority, notes) {
@@ -31,7 +31,27 @@ export class Project {
   }
 }
 
-export function createProject(title, description, dueDate, startDate, priority, notes) {
-  const newItem = new Project(title, description, dueDate, startDate, priority, notes);
-  allProjects.push(newItem);
+export function saveProjectsLocalStorage() {
+  localStorage.setItem('allProjects', JSON.stringify(allProjects));
+}
+
+export function loadProjectsFromLocalStorage() {
+  const savedProjects = localStorage.getItem('allProjects');
+
+  if (savedProjects) {
+    try {
+      const parsedData = JSON.parse(savedProjects);
+
+      // Additional validation to ensure parsedData is an array
+      if (!Array.isArray(parsedData)) {
+        throw new Error('Loaded data is not an array');
+      }
+
+      allProjects = parsedData;
+
+      console.log(allProjects);
+    } catch (error) {
+      alert(`There was an error loading your saved projects. Details: ${error.message}`);
+    }
+  }
 }
