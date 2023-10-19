@@ -1,11 +1,5 @@
 // Import from other modules
-import {
-  createMainHub,
-  createNavBar,
-  createProjectDiv,
-  showCurrentProject,
-  updateNavBar,
-} from './mainHub';
+import { updateCurrentProject, updateNavBar, showCurrentProject } from './mainHub';
 import { Project, allProjects, saveProjectsLocalStorage } from './project';
 import { TodoItem } from './todoItem';
 
@@ -94,7 +88,19 @@ function menuPopUp(menuTitle, fields) {
 }
 
 function removeCurrentItem() {
-  localStorage.clear();
+  const confirmation = confirm('Are you sure you want to delete the current project?');
+  if (confirmation) {
+    const selectedProjectIndex = allProjects.findIndex((project) => project.selected);
+    if (selectedProjectIndex !== -1) {
+      allProjects.splice(selectedProjectIndex, 1);
+      const projectWithGreatestPriority = allProjects.reduce((prev, curr) => (prev.priority > curr.priority ? prev : curr));
+      projectWithGreatestPriority.selected = true;
+      updateCurrentProject();
+      saveProjectsLocalStorage();
+
+      updateNavBar();
+    }
+  }
 }
 
 function openCalendar() {
