@@ -16,13 +16,12 @@ const todoItem1 = new TodoItem(
 );
 project1.addTodoItem(todoItem1);
 allProjects.push(project1);
-project1.selected = true;
-
-const currentProject = allProjects.find((project) => project.selected);
 
 document.addEventListener('DOMContentLoaded', () => {
   loadProjectsFromLocalStorage();
   createNavBar();
+  const currentProject = allProjects.find((project) => project.selected);
+
   showCurrentProject(currentProject);
   menuFunctions();
 });

@@ -1,8 +1,13 @@
-import { Project, allProjects } from './project';
+import { Project, allProjects, saveProjectsLocalStorage } from './project';
 
 const mainHub = document.getElementById('content-hub');
 
+// For the navBar
+
 export function createProjectDiv(project) {
+  if (!project) {
+    return;
+  }
   const projectDiv = document.createElement('div');
   const projectClass = `${project.title}`.replace(/\s+/g, '');
   projectDiv.className = `${projectClass}-div`;
@@ -18,7 +23,7 @@ export function createProjectDiv(project) {
 
   const projectProgress = document.createElement('div');
   projectProgress.className = 'project-progress';
-  projectProgress.textContent = `${project.calculateProgress || 0}%`;
+  projectProgress.textContent = `${project.calculateProgress() || 0}%`;
 
   projectInfo.appendChild(projectTitle);
   projectInfo.appendChild(projectDate);
@@ -27,6 +32,33 @@ export function createProjectDiv(project) {
 
   projectDiv.style.borderColor = project.priority;
   return projectDiv;
+}
+
+function setupProjectDivClickHandlers() {
+  const navBar = document.querySelector('.nav-bar');
+  const projectDivs = Array.from(navBar.children).filter((element) => element.tagName === 'DIV');
+
+  // Get only the unselected projects
+  const unselectedProjects = allProjects.filter((project) => !project.selected);
+
+  projectDivs.forEach((div, index) => {
+    let i = index;
+    div.addEventListener('click', () => {
+      if (i >= 0 && i < unselectedProjects.length) {
+        allProjects.forEach((project) => {
+          if (project === unselectedProjects[i]) {
+            project.selected = true;
+          } else {
+            project.selected = false;
+          }
+        });
+
+        saveProjectsLocalStorage();
+        updateNavBar();
+        updateCurrentProject();
+      }
+    });
+  });
 }
 
 export function createNavBar() {
@@ -45,6 +77,7 @@ export function createNavBar() {
   });
 
   mainHub.appendChild(navBar);
+  setupProjectDivClickHandlers();
 }
 
 export function updateNavBar() {
@@ -53,7 +86,10 @@ export function updateNavBar() {
   contentHub.removeChild(navBar);
 
   createNavBar();
+  setupProjectDivClickHandlers();
 }
+
+// For the current project
 
 export function showCurrentProject(project) {
   const currentProject = document.createElement('div');
@@ -66,6 +102,7 @@ export function showCurrentProject(project) {
   const headerInfo = document.createElement('div');
   headerInfo.className = 'project-header';
 
+  console.log(project instanceof Project, project);
   headerInfo.textContent =
     `${project.title}, ${project.dueDate}, ${project.calculateProgress()}` || '';
   headerInfo.style.borderColor = project.priority;
@@ -83,19 +120,28 @@ export function showCurrentProject(project) {
   mainHub.appendChild(currentProject);
 }
 
-export function createMainHub() {
-  mainHub.style.display = 'flex';
-
-  const navBar = createNavBar();
-  navBar.style.flex = '1';
-  mainHub.appendChild(navBar);
-
-  const projectDiv = document.createElement('div');
-  projectDiv.style.flex = '4';
-  mainHub.appendChild(projectDiv);
+export function updateCurrentProject() {
+  const contentHub = document.querySelector('#content-hub');
+  const currentProject = document.querySelector('.current-project');
+  contentHub.removeChild(currentProject);
 
   const selectedProject = allProjects.find((project) => project.selected);
-  if (selectedProject) {
-    showCurrentProject(selectedProject);
-  }
+  showCurrentProject(selectedProject);
 }
+
+// export function createMainHub() {
+//   mainHub.style.display = 'flex';
+
+//   const navBar = createNavBar();
+//   navBar.style.flex = '1';
+//   mainHub.appendChild(navBar);
+
+//   const projectDiv = document.createElement('div');
+//   projectDiv.style.flex = '4';
+//   mainHub.appendChild(projectDiv);
+
+//   const selectedProject = allProjects.find((project) => project.selected);
+//   if (selectedProject) {
+//     showCurrentProject(selectedProject);
+//   }
+// }
