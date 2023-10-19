@@ -1,19 +1,20 @@
 /* Content Hub styling*/
 #content-hub {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 4fr;
   width: 60%;
   justify-content: center;
 }
 
 .nav-bar {
   grid-area: 1 / 1 / 2 / 2;
+  min-width: 15rem;
 }
 
 .nav-bar > div {
   display: flex;
-  justify-content: space-around;
-  padding: 0.5rem;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
   border: #333 2px solid;
   border-radius: 1rem;
   margin: 1rem 0;
