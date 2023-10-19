@@ -47,7 +47,7 @@ export function loadProjectsFromLocalStorage() {
         throw new Error('Loaded data is not an array');
       }
 
-      allProjects = parsedData;
+      allProjects = parsedData.map((projectData) => Object.assign(new Project(), projectData));
 
       console.log(allProjects);
     } catch (error) {
