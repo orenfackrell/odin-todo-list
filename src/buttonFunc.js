@@ -94,7 +94,7 @@ function menuPopUp(menuTitle, fields) {
 }
 
 function removeCurrentItem() {
-  // add a way for the currently open todo item to be recorded, then simply remove the active one
+  localStorage.clear();
 }
 
 function openCalendar() {
@@ -180,8 +180,8 @@ function createItem() {
     });
   });
 
-  const addButton = document.querySelector('.submit-button');
-  addButton.addEventListener('click', (event) => {
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
     const newItem = new TodoItem(
       title.value,
@@ -267,8 +267,8 @@ function createProject() {
     });
   });
 
-  const addButton = document.querySelector('.submit-button');
-  addButton.addEventListener('click', (event) => {
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
     // create a new project and make it the active one
     const newProject = new Project(
