@@ -3,6 +3,12 @@ import popupMenu from './popupMenu';
 import { Project, allProjects, saveProjectsLocalStorage } from './project';
 
 const { body } = document;
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return `${date.getDate()} - ${date.getMonth() + 1} - ${date.getFullYear()}`;
+}
+
 function createProject() {
   const menuTitle = 'Create Todo Project';
   const fields = [
@@ -80,8 +86,8 @@ function createProject() {
     const newProject = new Project(
       title.value,
       description.value,
-      dueDate.value,
-      startDate.value,
+      formatDate(dueDate.value),
+      formatDate(startDate.value),
       priority.value,
       notes.value,
     );
@@ -97,7 +103,7 @@ function createProject() {
     newProject.selected = true;
     // add the new item to all projects
     allProjects.push(newProject);
-
+    console.log(allProjects);
     // remove the previous current project display
     const contentHub = document.querySelector('#content-hub');
     const previousCurrentDiv = document.querySelector('.current-project');
