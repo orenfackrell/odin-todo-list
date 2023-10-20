@@ -102,18 +102,32 @@ export function showCurrentProject(project) {
   const headerInfo = document.createElement('div');
   headerInfo.className = 'project-header';
 
-  headerInfo.textContent =
-    `${project.title}, ${project.dueDate}, ${project.calculateProgress()}%` || '0%';
-  headerInfo.style.borderColor = project.priority;
-  mainHub.appendChild(headerInfo);
+  const projectTitle = document.createElement('div');
+  projectTitle.textContent = `${project.title}`;
+
+  const projectDate = document.createElement('div');
+  projectDate.textContent = `${project.dueDate}`;
+
+  const projectProgress = document.createElement('div');
+  projectProgress.className = 'project-progress';
+  projectProgress.textContent = `${project.calculateProgress() || 0}%`;
 
   const todoItemsDiv = document.createElement('div');
   todoItemsDiv.className = 'project-task';
   project.todoItems.forEach((item) => {
     const itemDiv = document.createElement('div');
     itemDiv.textContent = `${item.title}, ${item.dueDate}, ${item.priority}`;
+
+    const checkbox = document.createElement('i');
+    checkbox.className = 'ph ph-square';
+
+    itemDiv.appendChild(checkbox);
     todoItemsDiv.appendChild(itemDiv);
   });
+
+  headerInfo.appendChild(projectTitle);
+  headerInfo.appendChild(projectDate);
+  headerInfo.appendChild(projectProgress);
   currentProject.appendChild(headerInfo);
   currentProject.appendChild(todoItemsDiv);
   mainHub.appendChild(currentProject);
