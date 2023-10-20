@@ -2,6 +2,7 @@ import { createMainHub, createNavBar, showCurrentProject } from './mainHub';
 import { Project, allProjects, loadProjectsFromLocalStorage } from './project';
 import { TodoItem } from './todoItem';
 import menuFunctions from './buttonFunc';
+import { applySavedTheme } from './editTheme';
 
 // Create dummy projects
 for (let i = 0; i < 6; i += 1) {
@@ -27,6 +28,7 @@ for (let i = 0; i < 6; i += 1) {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadProjectsFromLocalStorage();
+  applySavedTheme();
   createNavBar();
   const currentProject = allProjects.find((project) => project.selected);
 

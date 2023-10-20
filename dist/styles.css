@@ -5,6 +5,16 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  background-color: white;
+  color: black;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
 }
 
 /* Content Hub styling*/
@@ -38,12 +48,6 @@ body {
 }
 
 /* Styling for the calendar */
-
-* {
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-}
 
 .container {
   display: none;
